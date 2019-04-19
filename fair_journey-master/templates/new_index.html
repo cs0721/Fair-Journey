@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Fair Journey</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css"  href="Modus/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="Modus/fonts/font-awesome/css/font-awesome.css">
+
+
+    <!-- css -->
+    <link href="{% static 'valera/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'valera/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
+	<link href="{% static 'valera/css/nivo-lightbox.css" rel="stylesheet' %}" />
+	<link href="{% static 'valera/css/nivo-lightbox-theme/default/default.css' %}" rel="stylesheet" type="text/css" />
+	<link href="{% static 'valera/css/owl.carousel.css' %}" rel="stylesheet" media="screen" />
+    <link href="{% static 'valera/css/owl.theme.css' %}" rel="stylesheet" media="screen" />
+	<link href="{% static 'valera/css/flexslider.css' %}" rel="stylesheet" />
+	<link href="{% static 'valera/css/animate.css' %}" rel="stylesheet" />
+    <link href="{% static 'valera/css/style.css' %}" rel="stylesheet">
+	<link href="{% static 'valera/color/default.css' %}" rel="stylesheet">
+
+
+    <link href="{% static 'Modus/css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'Modus/css/prettyPhoto.css' %}" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
+    <script src="{% static "Modus/js/modernizr.custom.js" %}"></script>
+    <link href="https://fonts.googleapis.com/css?family=Bellefair|Open+Sans" rel="stylesheet">
+    <!--
+    <link rel="stylesheet" href="/static/css/styles-merged.css">
+    <link rel="stylesheet" href="/static/css/style.min.css">
+    -->
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+
+    <!-- page loader -->
+    <div id="page-loader">
+      <div class="loader">
+        <div class="spinner">
+          <div class="spinner-container con1">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+          </div>
+          <div class="spinner-container con2">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+          </div>
+          <div class="spinner-container con3">
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+            <div class="circle3"></div>
+            <div class="circle4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /page loader -->
+
+	<!-- Header -->
+    <div id="intro">
+    <div class="intro-body">
+        <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+            <h1>We are <span class="brand-heading">Fair Journey</span></h1>
+            <p class="intro-text">We help you plan your journey during construction disruption and ensure you have a pleasant experience.</p>
+            <a href="#service" class="btn btn-default page-scroll">START PLANNING</a> </div>
+        </div>
+        </div>
+    </div>
+    </div>
+    <!-- Header -->
+
+    <!-- Navigation -->
+    <div id="navigation">
+        <nav class="navbar navbar-custom" role="navigation">
+                              <div class="container">
+                                    <div class="row">
+                                          <div class="col-md-2 mob-logo">
+                                                <div class="row">
+                                                      <div class="site-logo">
+                                                            <a href="{% url 'index' %}"><img src="{% static '/img/new_logo2.png' %}" alt="" /></a>
+                                                      </div>
+                                                </div>
+                                          </div>
+
+
+                                          <div class="col-md-10 mob-menu">
+                                                <div class="row">
+                                                      <!-- Brand and toggle get grouped for better mobile display -->
+                                          <div class="navbar-header">
+                                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                                                <i class="fa fa-bars"></i>
+                                                </button>
+                                          </div>
+                                                      <!-- Collect the nav links, forms, and other content for toggling -->
+                                                      <div class="collapse navbar-collapse" id="menu">
+                                                            <ul class="nav navbar-nav navbar-right">
+                                                                  <li class="active"><a href="#intro">Home</a></li>
+                                                                  <li><a href="#service">Services</a></li>
+                                                                  <li><a href="#weather">Weather</a></li>
+                                                                 <!-- <li><a href="#works">Pedestrian Safety</a></li> -->
+                                                                  <li><a href="#event">Events</a></li>
+                                                                  <li><a href="#about">About Us</a></li>
+                                                            </ul>
+                                                      </div>
+                                                      <!-- /.Navbar-collapse -->
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                              <!-- /.container -->
+                        </nav>
+    </div>
+    <!-- /Navigation -->
+
+	<!-- Section: services -->
+    <section id="service" class="home-section color-dark bg-white">
+		<div class="container marginbot-50">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="0.4s">
+					<div class="section-heading text-center">
+					<h2 class="h-bold">Services</h2>
+					<div class="divider-header"></div>
+					<p>These are services provided by Fair Journey.</p>
+					</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="text-center">
+		<div class="container">
+
+        <div class="row">
+            <div class="col-xs-6 col-sm-3 col-md-3">
+				<div class="wow fadeInRight" data-wow-delay="0.2s">
+                <div class="service-box">
+					<div class="service-icon">
+						<span class="pe-7s-map pe-5x"></span>
+					</div>
+					<div class="service-desc">
+						<h5>Journey Planner</h5>
+						<p>
+					    We help you plan ahead with a journey in Melbourne CBD. Provide routes and its PDF file.
+						</p>
+						<a href="{% url 'map' %}" class="btn btn-skin">Learn more</a>
+					</div>
+                </div>
+				</div>
+            </div>
+			<div class="col-xs-6 col-sm-3 col-md-3">
+				<div class="wow fadeInUp" data-wow-delay="0.2s">
+                <div class="service-box">
+					<div class="service-icon">
+						<span class="pe-7s-graph1 pe-5x"></span>
+					</div>
+					<div class="service-desc">
+						<h5>Pedestrian Volume</h5>
+						<p>
+						We offer a pedestrian volume of the Melbourne CBD for a better travel experience for you.
+						</p>
+						<a href="{% url 'd3_map' %}" class="btn btn-skin">Learn more</a>
+					</div>
+                </div>
+				</div>
+            </div>
+
+			<div class="col-xs-6 col-sm-3 col-md-3">
+				<div class="wow fadeInUp" data-wow-delay="0.2s">
+                <div class="service-box">
+					<div class="service-icon">
+						<span class="pe-7s-map-marker pe-5x"></span>
+					</div>
+					<div class="service-desc">
+						<h5>Toilets & Lifts</h5>
+						<p>We display wheelchair accessible toilets and stations with lifts in Melbourne CBD.</p>
+						<a href="{% url 'small_map' %}" class="btn btn-skin">Learn more</a>
+					</div>
+                </div>
+				</div>
+            </div>
+             <div class="col-xs-6 col-sm-3 col-md-3">
+				<div class="wow fadeInLeft" data-wow-delay="0.2s">
+                <div class="service-box">
+					<div class="service-icon">
+						<span class="pe-7s-tools pe-5x"></span>
+					</div>
+					<div class="service-desc">
+						<h5>Road Surface</h5>
+						<p>
+						The road surface information in Melbourne CBD to convenient use of your mobility aid.
+						</p>
+						<a href="{% url 'surface' %}" class="btn btn-skin">Learn more</a>
+					</div>
+                </div>
+				</div>
+            </div>
+        </div>
+		</div>
+		</div>
+	</section>
+	<!-- /Section: services -->
+
+	<!-- Section: parallax 2 -->
+	<section id="parallax2" class="home-section parallax text-light" data-stellar-background-ratio="0.5">
+           <div class="container">
+				<div class="row appear stats">
+					<div class="col-md-3">
+						<div class="align-center color-white txt-shadow">
+							<div class="icon">
+								<i class="pe-7s-tools pe-5x"></i>
+							</div>
+						<strong id="counter-coffee" class="number">369</strong><br />
+						<span class="text">Road Blocked Sites</span>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="align-center color-white txt-shadow">
+							<div class="icon">
+								<i class="pe-7s-graph1 pe-5x"></i>
+							</div>
+						<strong id="counter-music" class="number">500</strong><br />
+						<span class="text">Average Pedestrians</span>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="align-center color-white txt-shadow">
+							<div class="icon">
+								<i class="pe-7s-map-marker pe-5x"></i>
+							</div>
+						<strong id="counter-clock" class="number">48</strong><br />
+						<span class="text">Toilets</span>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="align-center color-white txt-shadow">
+							<div class="icon">
+								<i class="pe-7s-info pe-5x"></i>
+							</div>
+						<strong id="counter-heart" class="number">34</strong><br />
+						<span class="text">Stations</span>
+						</div>
+					</div>
+				</div>
+            </div>
+	</section>
+    <!-- /Section: parallax 2 -->
+
+    <!-- Section: weather -->
+    <section id="weather" class="home-section color-dark text-center bg-white">
+        <div class=""container marginbot-50">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="0.4s">
+					    <div class="section-heading text-center">
+                            <h2 class="h-bold">Weather</h2>
+					    <div class="divider-header"></div>
+                            <p>We provides weather information for a better travel plan for you.</p>
+                            <p>You can change forecasting services and temperature units by clicking “forecast” or “unit”.</p>
+                        </div>
+                        <iframe src="https://weatherfor.us/widget?location=Melbourne+central&unit=metric" scrolling="no" frameborder="0" allowtransparency="true" style="background: transparent; width: 720px; height: 250px; overflow: hidden;"></iframe>
+					</div>
+				</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- /Section: weather -->
+
+	<!-- Section: works -->
+    <!--
+    <section id="works" class="home-section color-dark text-center bg-dark">
+		<div class="container marginbot-50">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="0.4s">
+					<div class="section-heading text-center">
+					<h2 class="h-bold">Pedestrian Safety</h2>
+					<div class="divider-header"></div>
+                    <p>Fair Journey provides information on pedestrian safety during construction, highlights issues and provides a checklist of key safety requirements.</p>
+					</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="container">
+			<div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12" >
+					<div class="wow bounceInUp" data-wow-delay="0.4s">
+                    <div id="owl-works" class="owl-carousel">
+                        <div class="popup"><a href="{% static 'img/safety/safety_01.png' %}" ><img src="{% static 'img/safety/safety_01.png' %}" class="img-responsive " alt="img"></a></div>
+                        <div class="popup"><a href="{% static 'img/safety/safety_02.png' %}" ><img src="{% static 'img/safety/safety_02.png' %}" class="img-responsive " alt="img"></a></div>
+                        <div class="popup"><a href="{% static 'img/safety/safety_03.png' %}" ><img src="{% static 'img/safety/safety_03.png' %}" class="img-responsive " alt="img"></a></div>
+                        <div class="popup"><a href="{% static 'img/safety/safety_04.png' %}" ><img src="{% static 'img/safety/safety_04.png' %}" class="img-responsive " alt="img"></a></div>
+                        <div class="popup"><a href="{% static 'img/safety/safety_05.png' %}" ><img src="{% static 'img/safety/safety_05.png' %}" class="img-responsive " alt="img"></a></div>
+                        <div class="popup"><a href="{% static 'img/safety/safety_06.png' %}" ><img src="{% static 'img/safety/safety_06.png' %}" class="img-responsive " alt="img"></a></div>
+                        <div class="popup"><a href="{% static 'img/safety/safety_07.png' %}" ><img src="{% static 'img/safety/safety_07.png' %}" class="img-responsive " alt="img"></a></div>
+                        <div class="popup"><a href="{% static 'img/safety/safety_08.png' %}" ><img src="{% static 'img/safety/safety_08.png' %}" class="img-responsive " alt="img"></a></div>
+                        <div class="popup"><a href="{% static 'img/safety/safety_09.png' %}" ><img src="{% static 'img/safety/safety_09.png' %}" class="img-responsive " alt="img"></a></div>
+                        <div class="popup"><a href="{% static 'img/safety/safety_10.png' %}" ><img src="{% static 'img/safety/safety_10.png' %}" class="img-responsive " alt="img"></a></div>
+                        <div class="popup"><a href="{% static 'img/safety/safety_11.png' %}" ><img src="{% static 'img/safety/safety_11.png' %}" class="img-responsive " alt="img"></a></div>
+                    </div>
+					</div>
+                </div>
+            </div>
+		</div>
+
+        <div class="show_safe">
+          <div class="overlay_safe"></div>
+          <div class="img-show_safe">
+            <span>X</span>
+            <img src="">
+          </div>
+        </div>
+        <style>
+            .show_safe{
+                z-index: 999;
+                display: none;
+            }
+            .show .overlay_safe{
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,.66);
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            .show .img-show_safe{
+                width: 600px;
+                height: 400px;
+                background: #FFF;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
+                overflow: hidden
+            }
+            .img-show_safe span{
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                z-index: 99;
+                cursor: pointer;
+            }
+            .img-show_safe img{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+        </style>
+        <script>
+            $(function () {
+                $(".owl-items").click(function () {
+                    var $src = $(this).attr("src");
+                    $(".show_safe").fadeIn();
+                    $(".img-show_safe img").attr("src", $src);
+                });
+
+                $("span, .overlay_safe").click(function () {
+                    $(".show_safe").fadeOut();
+                });
+
+                });
+        </script>
+	</section>
+	-->
+	<!-- /Section: works -->
+
+    <!-- Section: parallax 1 -->
+	<section id="parallax1" class="home-section parallax text-light" data-stellar-background-ratio="0.5">
+           <div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="text-center">
+						<h2 class="big-heading highlight-dark wow bounceInDown" data-wow-delay="0.2s">For long-term or temporarily impaired people with mobility issues.</h2>
+						</div>
+					</div>
+				</div>
+            </div>
+	</section>
+    <!-- /Section: parallax 1 -->
+
+	<!-- Section: event -->
+    <section id="event" class="home-section nopadd-bot color-dark bg-white text-center">
+		<div class="container marginbot-50">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="0.4s">
+					    <div class="section-heading text-center">
+					        <h2 class="h-bold">Events</h2>
+					        <div class="divider-header"></div>
+					        <p>These events are scheduled to take place in Melbourne CBD in 2019. The pedestrian volume is expected to be high on these days. Please refer to this information on your Melbourne CBD travel plan.</p>
+					    </div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+        <div class="categories">
+          <ul class="cat">
+            <li>
+              <ol class="type">
+                <li><a href="#" data-filter="*" class="active">All</a></li>
+                <li><a href="#" data-filter=".fir">1-4</a></li>
+                <li><a href="#" data-filter=".sec">5-8</a></li>
+                <li><a href="#" data-filter=".thi">9-12</a></li>
+              </ol>
+            </li>
+          </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="row">
+          <div class="portfolio-items">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 fir">
+              <div class="portfolio-item">
+                <div class="hover-bg"> <a href="{% static 'img/events/event_01.png' %}" title="January Event" rel="prettyPhoto">
+                    <!--<a href="img/events/event_01.png" title="Project description" rel="prettyPhoto"> -->
+                  <div class="hover-text">
+                    <h4>January</h4>
+                    <p>Jan-Apr</p>
+                  </div>
+                  <img src="{% static 'img/events/event_01.png' %}"  class="img-responsive" alt="January Event"> </a> </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 fir">
+              <div class="portfolio-item">
+                <div class="hover-bg"> <a href="{% static 'img/events/event_02.png' %}" title="February Event" rel="prettyPhoto">
+                  <div class="hover-text">
+                    <h4>February</h4>
+                    <p>Jan-Apr</p>
+                  </div>
+                  <img src="{% static 'img/events/event_02.png' %}"  class="img-responsive" alt="February Event"> </a> </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 fir">
+              <div class="portfolio-item">
+                <div class="hover-bg"> <a href="{% static 'img/events/event_03.png' %}" title="March Event" rel="prettyPhoto">
+                  <div class="hover-text">
+                    <h4>March</h4>
+                    <p>Jan-Apr</p>
+                  </div>
+                  <img src="{% static 'img/events/event_03.png' %}"  class="img-responsive" alt="March Event"> </a> </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 fir">
+              <div class="portfolio-item">
+                <div class="hover-bg"> <a href="{% static 'img/events/event_04.png' %}" title="April Event" rel="prettyPhoto">
+                  <div class="hover-text">
+                    <h4>April</h4>
+                    <p>Jan-Apr</p>
+                  </div>
+                  <img src="{% static 'img/events/event_04.png' %}"  class="img-responsive" alt="May Event"> </a> </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 sec">
+              <div class="portfolio-item">
+                <div class="hover-bg"> <a href="{% static 'img/events/event_05.png' %}" title="May Event" rel="prettyPhoto">
+                  <div class="hover-text">
+                    <h4>May</h4>
+                    <p>May-Aug</p>
+                  </div>
+                  <img src="{% static 'img/events/event_05.png' %}"  class="img-responsive" alt="June Event"> </a> </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 sec">
+              <div class="portfolio-item">
+                <div class="hover-bg"> <a href="{% static 'img/events/event_06.png' %}" title="July  Event" rel="prettyPhoto">
+                  <div class="hover-text">
+                    <h4>June</h4>
+                    <p>May-Aug</p>
+                  </div>
+                  <img src="{% static 'img/events/event_06.png' %}"  class="img-responsive" alt="Project Title"> </a> </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 sec">
+              <div class="portfolio-item">
+                <div class="hover-bg"> <a href="{% static 'img/events/event_07.png' %}" title="August Event" rel="prettyPhoto">
+                  <div class="hover-text">
+                    <h4>July</h4>
+                    <p>May-Aug</p>
+                  </div>
+                  <img src="{% static 'img/events/event_07.png' %}"  class="img-responsive" alt="August Event"> </a> </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 sec">
+              <div class="portfolio-item">
+                <div class="hover-bg"> <a href="{% static 'img/events/event_08.png' %}" title="September Event" rel="prettyPhoto">
+                  <div class="hover-text">
+                    <h4>August</h4>
+                    <p>May-Aug</p>
+                  </div>
+                  <img src="{% static 'img/events/event_08.png' %}"  class="img-responsive" alt="September Event"> </a> </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 thi">
+              <div class="portfolio-item">
+                <div class="hover-bg"> <a href="{% static 'img/events/event_09.png' %}" title="October Event" rel="prettyPhoto">
+                  <div class="hover-text">
+                    <h4>September</h4>
+                    <p>Sep-Dec</p>
+                  </div>
+                  <img src="{% static 'img/events/event_09.png' %}"  class="img-responsive" alt="October Event"> </a> </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 thi">
+              <div class="portfolio-item">
+                <div class="hover-bg"> <a href="{% static 'img/events/event_10.png' %}" title="November Event" rel="prettyPhoto">
+                  <div class="hover-text">
+                    <h4>October</h4>
+                    <p>Sep-Dec</p>
+                  </div>
+                  <img src="{% static 'img/events/event_10.png' %}"  class="img-responsive" alt="November Event"> </a> </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 thi">
+              <div class="portfolio-item">
+                <div class="hover-bg"> <a href="{% static 'img/events/event_11.png' %}" title="December Event" rel="prettyPhoto">
+                  <div class="hover-text">
+                    <h4>November</h4>
+                    <p>Sep-Dec</p>
+                  </div>
+                  <img src="{% static 'img/events/event_11.png' %}"  class="img-responsive" alt="December Event"> </a> </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 thi">
+              <div class="portfolio-item">
+                <div class="hover-bg"> <a href="{% static 'img/events/event_12.png' %}" title="Project description" rel="prettyPhoto">
+                  <div class="hover-text">
+                    <h4>December</h4>
+                    <p>Sep-Dec</p>
+                  </div>
+                  <img src="{% static 'img/events/event_12.png' %}"  class="img-responsive" alt="Project Title"> </a> </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+	</section>
+	<!-- /Section: event -->
+
+    <!-- Section: about -->
+    <section id="about" class="home-section color-dark bg-white>
+        <div class="container marginbot-50">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="wow flipInY" data-wow-offset="0" data-wow-delay="0.4s">
+					<div class="section-heading text-center">
+					<h2 class="h-bold">About</h2>
+					<div class="divider-header"></div>
+					<br />
+                        <p style="text-align: justify">The Fair journey project is dedicated to helping the disability with mobility issues to avoid the inconvenience caused by construction during their travels in Melbourne CBD. The project is committed to providing effective and efficent information to help them choose a more suitable travel plan that has reached the goal of building equality for all.</p>
+
+                        <p style="text-align: justify">The Fair journey project timely and accurately update engineering and road information for the Melbourne CBD area through VicRoads open dataset and City of Melbourne open dataset. Customers can always search for construction information and road conditions in the vicinity of Melbourne and make travel options and plans that are more suitable for them based on the information they have.</p>
+					</div>
+					</div>
+				</div>
+			</div>
+        </div>
+    </section>
+	<!-- /Section: about -->
+
+    <!-- Section: parallax 3 -->
+    <style>
+        p {
+            display: block;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            margin-left: 15px;
+            margin-right: 15px;
+            }
+    </style>
+
+	<section id="parallax3" class="home-section parallax text-light text-center" data-stellar-background-ratio="0.5">
+           <div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="testimonialslide clearfix flexslider">
+							<ul class="slides">
+								<li><blockquote>
+								Our data is provided through APIs in VicRoads and Weatherfor.us is updated hourly to maintain accuracy.
+									</blockquote>
+                                    <h4>Real-time information</h4>
+								</li>
+								<li><blockquote>
+								Our system aims to provide useful information for people with long-term or temporary mobility problems. Public facilities for people with disabilities marked with reachable range.
+                                </blockquote>
+                                    <h4>Designed for people with disabilities</h4>
+								</li>
+                                <li><blockquote>
+							    The navigation system allows the user to walk from any point.
+                                </blockquote>
+                                    <h4>Flexible travel plan</h4>
+								</li>
+                                <li><blockquote>
+							    Support the pdf download file for those unfamiliar with the small screen and those planning their trip in an analog manner.
+                                </blockquote>
+                                    <h4>Services for analog people</h4>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+            </div>
+	</section>
+    <!-- /Section: parallax 3 -->
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+
+					<div class="text-center">
+						<a href="#intro" class="totop"><i class="pe-7s-angle-up pe-3x"></i></a>
+                        <p>Back To Top</p>
+                        
+                        <div class="row">
+                            <h6 style="color: white">Open data sources that we use</h6>
+                            <div class="col-md-4 col-sm-6 col-xs-6 text-center client-logo probootstrap-animate">
+                                <a href="https://www.vicroads.vic.gov.au/" target="_blank">
+                                    <img src="/static/img/viclogo1.png" class="img-responsive" width="180" height="120" alt="Free Bootstrap Template by uicookies.com">
+                                </a>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-6 text-center client-logo probootstrap-animate">
+                                <a href="https://www.melbourne.vic.gov.au/Pages/home.aspx" target="_blank">
+                                    <img src="/static/img/citylogo1.png" class="img-responsive" width="180" height="120" alt="Free Bootstrap Template by uicookies.com">
+                                </a>
+                            </div>
+                            <div class="col-md-4 col-sm-6 col-xs-6 text-center client-logo probootstrap-animate">
+                                <a href="https://www.ptv.vic.gov.au/" target="_blank">
+                                    <img src="/static/img/ptlogo1.png" class="img-responsive" width="180" height="120" alt="Free Bootstrap Template by uicookies.com">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <p>The Fair Journey project by Pro-Planners, Monash University<br />
+                    &copy;Copyright 2015 - Valera. All rights reserved.  | Designed by <a href="http://bootstraptaste.com">BootstrapTaste</a></p>
+                </div>
+            </div>
+        </div>
+	</footer>
+
+    <!-- Core JavaScript Files -->
+    <script src="{% static 'valera/js/jquery.min.js' %}"></script>
+    <script src="{% static 'valera/js/bootstrap.min.js' %}"></script>
+	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<script src="{% static 'valera/js/jquery.sticky.js' %}"></script>
+	<script src="{% static 'valera/js/slippry.min.js' %}"></script>
+	<script src="{% static 'valera/js/jquery.flexslider-min.js' %}"></script>
+	<script src="{% static 'valera/js/morphext.min.js' %}"></script>
+	<script src="{% static 'valera/js/gmap.js' %}"></script>
+	<script src="{% static 'valera/js/jquery.mb.YTPlayer.js' %}"></script>
+    <script src="{% static 'valera/js/jquery.easing.min.js' %}"></script>
+	<script src="{% static 'valera/js/jquery.scrollTo.js' %}"></script>
+	<script src="{% static 'valera/js/jquery.appear.js' %}"></script>
+	<script src="{% static 'valera/js/stellar.js' %}"></script>
+	<script src="{% static 'valera/js/wow.min.js' %}"></script>
+	<script src="{% static 'valera/js/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'valera/js/nivo-lightbox.min.js' %}"></script>
+	<script src="{% static 'valera/js/jquery.nicescroll.min.js' %}"></script>
+    <script src="{% static 'valera/js/custom.js' %}"></script>
+
+    <script src="{% static 'js/scripts.min.js' %}"></script>
+    <script src="{% static 'js/custom.min.js' %}"></script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'Modus/js/jquery.1.11.1.js' %}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'Modus/js/bootstrap.js' %}"></script>
+    <script src="{% static 'Modus/js/SmoothScroll.js' %}"></script>
+    <script src="{% static 'Modus/js/jquery.prettyPhoto.js' %}"></script>
+    <script src="{% static 'Modus/js/jquery.isotope.js' %}"></script>
+    <script src="{% static 'Modus/js/jquery.parallax.js' %}"></script>
+    <script src="{% static 'Modus/js/jqBootstrapValidation.js' %}"></script>
+    <script src="{% static 'Modus/js/contact_me.js' %}"></script>
+
+    <!-- Javascripts
+        ================================================== -->
+    <script type="text/javascript" src="{% static 'Modus/js/main.js' %}"></script>
+    </body>
+    </html>
+
+</body>
+
+</html>

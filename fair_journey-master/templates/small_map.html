@@ -1,0 +1,240 @@
+ <!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Fair Journey</title>
+    <meta name="description" content="Free Bootstrap Theme by uicookies.com">
+    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+    <link href="https://fonts.googleapis.com/css?family=Bellefair|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles-merged.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+
+   <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.css' type='text/css' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v1.3.0/turf.min.js'></script>
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.0.1/mapbox.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script type="text/javascript" src ="{% static 'html2canvas.js' %}"></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.0.1/mapbox.css' rel='stylesheet' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+    <script src="https://d3js.org/d3-array.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo.v1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' />
+          <link href="{% static 'valera/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'valera/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css" />
+	<link href="{% static 'valera/css/nivo-lightbox.css" rel="stylesheet' %}" />
+	<link href="{% static 'valera/css/nivo-lightbox-theme/default/default.css' %}" rel="stylesheet" type="text/css" />
+	<link href="{% static 'valera/css/owl.carousel.css' %}" rel="stylesheet" media="screen" />
+    <link href="{% static 'valera/css/owl.theme.css' %}" rel="stylesheet" media="screen" />
+	<link href="{% static 'valera/css/flexslider.css' %}" rel="stylesheet" />
+	<link href="{% static 'valera/css/animate.css' %}" rel="stylesheet" />
+    <link href="{% static 'valera/css/style.css' %}" rel="stylesheet">
+	<link href="{% static 'valera/color/default.css' %}" rel="stylesheet">
+
+
+  </head>
+  <body>
+
+    <!-- Fixed navbar -->
+
+
+   <div id="navigation">
+        <nav class="navbar navbar-custom" role="navigation">
+                              <div class="container">
+                                    <div class="row">
+                                          <div class="col-md-2 mob-logo">
+                                                <div class="row">
+                                                      <div class="site-logo">
+                                                            <a href="{% url 'index' %}"><img src="{% static '/img/new_logo2.png' %}" alt="" /></a>
+                                                      </div>
+                                                </div>
+                                          </div>
+
+
+                                          <div class="col-md-10 mob-menu">
+                                                <div class="row">
+                                                      <!-- Brand and toggle get grouped for better mobile display -->
+                                          <div class="navbar-header">
+                                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                                                <i class="fa fa-bars"></i>
+                                                </button>
+                                          </div>
+                                                      <!-- Collect the nav links, forms, and other content for toggling -->
+                                                      <div class="collapse navbar-collapse" id="menu">
+                                                            <ul class="nav navbar-nav navbar-right">
+                                                                  <li><a href="{% url 'index' %}">Home</a></li>
+
+
+                                                            </ul>
+                                                      </div>
+                                                      <!-- /.Navbar-collapse -->
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                              <!-- /.container -->
+                        </nav>
+    </div>
+
+
+
+     <div id='map' style=" position:absolute; top:90px; left:20%; right:20%; height:100%;">
+     </div>
+    </div>
+    <script>
+        var canvas2 = document.createElement("canvas");
+        let
+        _canvas = document.querySelector('#map');
+        var w = parseInt(window.getComputedStyle(_canvas).width);
+        var h = parseInt(window.getComputedStyle(_canvas).height);
+        canvas2.width = w * 2;
+        canvas2.height = h * 2;
+        canvas2.style.width = w + "px";
+        canvas2.style.height = h + "px";
+        var context = canvas2.getContext("2d");
+        context.scale(2, 2);
+        html2canvas(document.querySelector('.mapboxgl-canvas'), { canvas: canvas2 }).then(function(canvas) {
+            document.querySelector(".down").setAttribute('href', canvas.toDataURL());
+    });
+    </script>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoidGlhbnl1ZW1hMDEwMSIsImEiOiJjamwzdjk2OTYwMTl4M3dtdHgzYW16ZnJuIn0.9DqSeP50_GMdrZiD3SkYng';
+        var map = new mapboxgl.Map({
+          container: 'map', // container id
+          style: 'mapbox://styles/mapbox/streets-v9', //hosted style id
+          center: [144.9631,-37.8136], // starting position
+          zoom: 14.5, // starting zoom
+          minZoom: 9, // keep it local
+          preserveDrawingBuffer: true
+        });
+        var start_point,destination, routines;
+
+        map.on('load', function () {
+
+           map.loadImage('https://cdn.rawgit.com/MattMa0101/fair_journey/7b0ee58f/459566545566619251.png', function(error, image) {
+                    if (error) throw error;
+                    map.addImage('toilet_image', image);
+                    map.addSource('toilet',{
+                        type: 'geojson',
+                        data: 'https://cdn.rawgit.com/MattMa0101/fair_journey/b7325927/toilet.geojson'
+                    })
+
+                    map.addLayer({
+                        "id": "toilet",
+                        "type": "symbol",
+                        "source": 'toilet',
+                        "layout": {
+                                "icon-image": "toilet_image",
+                                "icon-size": 0.04,
+                                "icon-allow-overlap": true
+                            }
+                    });
+
+            });
+
+            map.loadImage('https://cdn.rawgit.com/MattMa0101/fair_journey/7b0ee58f/655423332772591980.png', function(error, image) {
+                    if (error) throw error;
+                    map.addImage('crowd', image);
+                    map.addSource('crowd',{
+                        type: 'geojson',
+                        data: 'https://cdn.rawgit.com/MattMa0101/fair_journey/b7325927/elevator.geojson'
+                    })
+
+                    map.addLayer({
+                        "id": "crowded",
+                        "type": "symbol",
+                        "source": 'crowd',
+                        "layout": {
+                                "icon-image": "crowd",
+                                "icon-size": 0.04,
+                                "icon-allow-overlap": true
+                            }
+                    });
+
+            });
+
+
+            var popup = new mapboxgl.Popup({
+                closeButton: false,
+                closeOnClick: false
+            });
+
+
+            map.on('mouseenter', 'toilet', function (e) {
+                // Change the cursor style as a UI indicator.
+                map.getCanvas().style.cursor = 'pointer';
+
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var description = e.features[0].properties.description;
+
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+                // Populate the popup and set its coordinates
+                // based on the feature found.
+                popup.setLngLat(coordinates)
+                    .setHTML(description)
+                    .addTo(map);
+            });
+
+            map.on('mouseenter', 'crowded', function (e) {
+                // Change the cursor style as a UI indicator.
+                map.getCanvas().style.cursor = 'pointer';
+
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var description = e.features[0].properties.description;
+
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+                // Populate the popup and set its coordinates
+                // based on the feature found.
+                popup.setLngLat(coordinates)
+                    .setHTML(description)
+                    .addTo(map);
+            });
+
+            map.on('mouseleave', 'crowded', function () {
+                map.getCanvas().style.cursor = '';
+                popup.remove();
+            });
+
+            map.on('mouseleave', 'toilet', function () {
+                map.getCanvas().style.cursor = '';
+                popup.remove();
+            });
+
+        })
+        var geolocate = new mapboxgl.GeolocateControl({
+                    showUserLocationObject: true
+            });
+
+            map.addControl(geolocate);
+        var nav = new mapboxgl.NavigationControl();
+    map.addControl(nav, 'top-right');
+    </script>
+
+
+
+    <script src="{% static 'js/scripts.min.js' %}"></script>
+    <script src="{% static 'js/custom.min.js' %}"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,1063 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset='utf-8' />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Fair Journey</title>
+    <meta name="description" content="Free Bootstrap Theme by uicookies.com">
+    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+    <link href="https://fonts.googleapis.com/css?family=Bellefair|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles-merged.css">
+    <link rel="stylesheet" href="/static/css/style.min.css">
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.css' type='text/css' />
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/turf/v1.3.0/turf.min.js'></script>
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v2.0.1/mapbox.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v2.0.1/mapbox.css' rel='stylesheet' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+    <script src="https://d3js.org/d3-array.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo.v1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+    <link href='https://www.mapbox.com/base/latest/base.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="/static/valera/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/valera/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href="/static/valera/css/nivo-lightbox.css%22%20rel%3D%22stylesheet" />
+	<link href="/static/valera/css/nivo-lightbox-theme/default/default.css" rel="stylesheet" type="text/css" />
+	<link href="/static/valera/css/owl.carousel.css" rel="stylesheet" media="screen" />
+    <link href="/static/valera/css/owl.theme.css" rel="stylesheet" media="screen" />
+	<link href="/static/valera/css/flexslider.css" rel="stylesheet" />
+	<link href="/static/valera/css/animate.css" rel="stylesheet" />
+    <link href="/static/valera/css/style.css" rel="stylesheet">
+	<link href="/static/valera/color/default.css" rel="stylesheet">
+
+
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+
+        #map { position:absolute; top:88px; bottom:0; width:100%; left: 0px; }
+
+        .leaflet-popup-content .marker-title{font-weight:500;color:#999;line-height:1.3em;}
+        .marker-title span{color:#00704A;font-weight:bold;}
+        #distanceCount{line-height:2em;color:dodgerblue}
+        .space-left2 {margin-left: 20px;}
+
+        #instructions {
+            margin: 1px;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+            padding: 1px;
+            background-color: #f9f9f9;
+            overflow-y: scroll;
+            font-family: Verdana;
+            font-size: 11px;
+            font-weight:500;
+            color:black;
+            opacity: 0.8;
+        }
+
+        #project {
+            margin: 1px;
+            width: 100%;
+            top: 0;
+            bottom: 0;
+            padding: 1px;
+            background-color: #f9f9f9;
+            overflow-y: scroll;
+            font-family: Verdana;
+            font-size: 11px;
+            font-weight:500;
+            color:black;
+            opacity: 0.8;
+        }
+
+        #toggle  {
+            height:30px;
+            width:30px;
+            top:2px;
+            position: absolute;
+            left: 265px;
+            background-color: #f9f9f9;
+            color:black;
+    }
+        #toggle_2  {
+            height:30px;
+            width:30px;
+            top:90px;
+            position: absolute;
+            left: 0px;
+            background-color: #f9f9f9;
+            color:black;
+            display: none;
+        }
+        ul.pin-top {
+            border-radius: 3px;
+            opacity: 1;
+            font-size:11px;
+            top:92px;
+            left:0px;
+            background-color: #f9f9f9;
+            color: black;
+            opacity:1;
+        }
+
+        ul.pin-top li {
+            background-color: #f9f9f9;
+            color: black;
+            opacity: 1;
+        }
+
+        span.label {
+            display: block;
+            font-size:11px;
+        }
+
+        li.fill-white {
+            padding: .5em 1em 1em 1em;
+            background-color: #f9f9f9;
+            color:black;
+            opacity: 0.9;
+        }
+
+        li.content {
+            display: none;
+            background-color: #f9f9f9;
+            color:black;
+            opacity: 1;
+
+        }
+
+        li.fill-white .content {
+            display: block;
+            background-color: #f9f9f9;
+            color:black;
+            opacity: 1;
+        }
+
+        li.fill-white span.label, li.fill-purple span.label, li.fill-green span.label {
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 11px;
+            margin-bottom: 1em;
+            opacity: 1;
+        }
+
+        li.fill-green, li.fill-purple {
+            color: #ffff;
+            opacity: 0.9;
+        }
+
+        .fill-blue {
+        background: #FE7A44;
+        font-size: 10px;
+        width:120px
+        }
+
+        .dt-button{
+            background: #FE7A44;
+            color:white;
+            margin-left:30%;
+            margin-right:50%;
+            width:120px;
+            text-align: center;
+        }
+
+        .fr {
+        float: left;
+        }
+
+        .elevGraph {
+            fill: #FE7A44;
+            stroke: none;
+            opacity: 0.4;
+            stroke-width: 4px;
+        }
+
+        #title-block {
+            height: 35px;
+        }
+
+        #tooltip {
+            display:none;
+            position: absolute;
+            top:0;
+            left:0;
+        }
+
+        #searchresults {
+            width: 200%;
+            background: #404040;
+            color:#323643;
+        }
+
+        .marker-hover {
+            background: #FE7A44;
+            border-radius: 50%;
+            border: 2px solid white;
+            height: 20px;
+        }
+
+        .focus circle {
+            fill: steelblue;
+            stroke: white;
+        }
+
+        #geolocate { display: none; }
+    </style>
+</head>
+<body>
+    <script src="/static/assets/web/assets/jquery/jquery.min.js"></script>
+    <script src="/static/assets/popper/popper.min.js"></script>
+    <script src="/static/assets/tether/tether.min.js"></script>
+    <script src="/static/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/assets/smoothscroll/smooth-scroll.js"></script>
+    <script src="/static/assets/dropdown/js/script.min.js"></script>
+    <script src="/static/assets/ytplayer/jquery.mb.ytplayer.min.js"></script>
+    <script src="/static/assets/vimeoplayer/jquery.mb.vimeo_player.js"></script>
+    <script src="/static/assets/bootstrapcarouselswipe/bootstrap-carousel-swipe.js"></script>
+    <script src="/static/assets/touchswipe/jquery.touch-swipe.min.js"></script>
+    <script src="/static/assets/theme/js/script.js"></script>
+    <script src="/static/assets/slidervideo/script.js"></script>
+    <script src = 'https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js'></script>
+    <script src = 'https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js'></script>
+    <script src = 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js'></script>
+
+    <script src = 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js'></script>
+    <script src = 'https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js'></script>
+
+ <div id="navigation">
+        <nav class="navbar navbar-custom" role="navigation">
+                              <div class="container">
+                                    <div class="row">
+                                          <div class="col-md-2 mob-logo">
+                                                <div class="row">
+                                                      <div class="site-logo">
+                                                            <a href="/index/"><img src="/static/img/new_logo2.png" alt="" /></a>
+                                                      </div>
+                                                </div>
+                                          </div>
+
+
+                                          <div class="col-md-10 mob-menu">
+                                                <div class="row">
+                                                      <!-- Brand and toggle get grouped for better mobile display -->
+                                          <div class="navbar-header">
+                                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+                                                <i class="fa fa-bars"></i>
+                                                </button>
+                                          </div>
+                                                      <!-- Collect the nav links, forms, and other content for toggling -->
+                                                      <div class="collapse navbar-collapse" id="menu">
+                                                            <ul class="nav navbar-nav navbar-right">
+                                                                  <li><a href="/index/">Home</a></li>
+
+                                                            </ul>
+                                                      </div>
+                                                      <!-- /.Navbar-collapse -->
+                                                </div>
+                                          </div>
+                                    </div>
+                              </div>
+                              <!-- /.container -->
+                        </nav>
+    </div>
+
+
+    <div id='map'></div>
+
+    <!--<ul class='pin-top pad1 quiet space-top2 space-left2 col3'>-->
+    <button id="toggle_2" onclick="sidebar_control()">&#9776</button>
+    <ul id="sidebar" class='pin-top col3'>
+        <li id='dst-location' class='fill-white keyline-bottom'>
+            <!--<span class='label'>Choose starting location</span>-->
+            <div class='content'>
+                <div>Start Point <button id="toggle" onclick="sidebar_control()">&#9776</button></div>
+
+                <div id='geocoder_1' class='row1 space-top1'></div>
+            </div>
+            <div class='content'>
+                <div> Destination</div>
+                <div id='geocoder_2' class='row1 space-top1'></div>
+            </div>
+        </li>
+
+        <li id='route-info' class='fill-gray keyline-bottom'>
+            <div><span class='label'><b>Step::</b></span></div>
+            <div id='instructions' class='content row6'>
+            </div>
+        </li>
+<!--
+    <li id='route-info' class='fill-gray'>
+        <p><span class='label'><b>Road Construction:</b></span></p>
+        <div id='project' class='content row4'>
+        </div>
+    </li>-->
+
+        <li id='title-block' class='fill-denim dark keyline-bottom'>
+            <div class='co16 margin1 button short fr fill-blue' id='hideproject'>Show Constructions</div>
+            <div class='co16 margin1 button short fr fill-blue' id='hidetoilet'>Show Toilets</div>
+
+        </li>
+
+         <li id='title-block' class='fill-denim dark keyline-bottom'>
+            <div class='co14 margin1 button short fr fill-blue refresh'>Refresh</div>
+            <div class='co14 margin1 button short fr fill-blue' id='crowded'>Show Lifts</div>
+        </li>
+        <li>
+            <table id="example">
+                <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+
+            </table>
+        </li>
+
+    </ul>
+
+
+
+    <script>
+      // var button = document.getElementById('toggle'),
+       //sidebar = document.getElementById('sidebar');
+
+        //console.log(button);
+       function sidebar_control(){
+           var button = document.getElementById('toggle'),
+               button2 = document.getElementById('toggle_2'),
+               sidebar = document.getElementById('sidebar');
+            console.log("11111")
+           if (sidebar.style.display === "none") {
+            sidebar.style.display = "block";
+            button.style.left = "265px";
+             button2.style.display = 'none'
+        } else {
+            sidebar.style.display = "none";
+            button2.style.display = "block";
+    }
+       };
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoidGlhbnl1ZW1hMDEwMSIsImEiOiJjamwzdjk2OTYwMTl4M3dtdHgzYW16ZnJuIn0.9DqSeP50_GMdrZiD3SkYng';
+        var map = new mapboxgl.Map({
+          container: 'map', // container id
+          style: 'mapbox://styles/mapbox/streets-v9', //hosted style id
+          center: [144.9631,-37.8136], // starting position
+          zoom: 14.5, // starting zoom
+          minZoom: 9, // keep it local
+          preserveDrawingBuffer: true
+        });
+
+        $('#example').DataTable( {
+                    dom: 'Bfrtip',
+                    buttons: [
+                        {
+                            extend: 'pdfHtml5',
+			    text: 'Download PDF',
+                            customize: function ( doc ) {
+                                var img = new Image();
+                                var mapCanvas = map.getCanvas(document.querySelector('.mapboxgl-canvas'));
+                                img.src = mapCanvas.toDataURL();
+                                var steps = document.getElementsByTagName("p");
+                                console.log(document.getElementById("geocoder_1").getElementsByTagName('input')[0].value);
+                                var beginning = document.getElementById("geocoder_1").getElementsByTagName('input')[0].value,
+                                    ending = document.getElementById("geocoder_2").getElementsByTagName('input')[0].value;
+                                var text_content = [];
+                                for (var i = 0;i < steps.length; i++){
+                                     text_content.push({"text": steps[i].innerHTML + "\n"});
+                                }
+                                console.log(text_content)
+                                doc.content.splice(1, 0,
+                                    {
+                                        margin: [0, 0, 0, 12],
+                                        alignment: 'middle',
+                                        width: 500,
+                                        image: img.src,
+
+                                    },
+                                );
+
+                                doc.content.splice(2, 0,
+                                    {
+                                        margin: [0, 0, 0, 12],
+                                        alignment: 'left',
+                                        width: 300,
+                                        text: [{ text: 'Thanks for using the fair journey website \n',bold:true,fontSize:15 },
+                                       { text: 'Please follow the steps.',italics:true,fontSize:12 }]
+
+                                    },
+                                );
+
+                                doc.content.splice(3, 0,
+                                    {
+                                        margin: [0, 0, 0, 12],
+                                        alignment: 'left',
+                                        width: 300,
+                                        text: [{ text: "Start point: " + beginning + ' \n', italics:true,fontSize:10 },
+                                       { text: "Destination: " + ending + ' \n',italics:true,fontSize:10 }]
+
+                                    },
+                                );
+                                doc.content.splice(4, 0,
+                                    {
+                                        margin: [0, 0, 0, 12],
+                                        alignment: 'left',
+                                        width: 300,
+                                        text: text_content,
+
+                                    },
+                                );
+                            }
+                                }
+                            ]
+                        } );
+
+        $('#example').hide();
+            $('#example_paginate').hide();
+            $('#example_filter').hide();
+            $('#example_info').hide();
+            $('#top-1').hide();
+        var start_point,destination, routines;
+
+        map.on('load', function () {
+
+             map.loadImage('https://cdn.rawgit.com/MattMa0101/fair_journey/dc41a050/icons8-under-construction-50.png', function(error, image) {
+                    if (error) throw error;
+                    map.addImage('roadwork', image);
+                    map.addSource('roadconstruction',{
+                        type: 'geojson',
+                        data: 'https://cdn.rawgit.com/MattMa0101/fair_journey/b01bf584/myfile.geojson'
+                    })
+
+                    map.addLayer({
+                        "id": "places",
+                        "type": "symbol",
+                        "source": 'roadconstruction',
+                        "layout": {
+                                "icon-image": "roadwork",
+                                "icon-size": 0.5,
+                                "icon-allow-overlap": true
+                            }
+                    });
+
+            map.setLayoutProperty('places', 'visibility', 'none');
+             });
+
+            map.loadImage('https://cdn.rawgit.com/MattMa0101/fair_journey/7b0ee58f/459566545566619251.png', function(error, image) {
+                    if (error) throw error;
+                    map.addImage('toilet_image', image);
+                    map.addSource('toilet',{
+                        type: 'geojson',
+                        data: 'https://cdn.rawgit.com/MattMa0101/fair_journey/b7325927/toilet.geojson'
+                    })
+
+                    map.addLayer({
+                        "id": "toilet",
+                        "type": "symbol",
+                        "source": 'toilet',
+                        "layout": {
+                                "icon-image": "toilet_image",
+                                "icon-size": 0.03,
+                                "icon-allow-overlap": true
+                            }
+                    });
+
+            map.setLayoutProperty('toilet', 'visibility', 'none');
+            });
+
+            map.loadImage('https://cdn.rawgit.com/MattMa0101/fair_journey/7b0ee58f/655423332772591980.png', function(error, image) {
+                    if (error) throw error;
+                    map.addImage('crowd', image);
+                    map.addSource('crowd',{
+                        type: 'geojson',
+                        data: 'https://cdn.rawgit.com/MattMa0101/fair_journey/b7325927/elevator.geojson'
+                    })
+
+                    map.addLayer({
+                        "id": "crowded",
+                        "type": "symbol",
+                        "source": 'crowd',
+                        "layout": {
+                                "icon-image": "crowd",
+                                "icon-size": 0.03,
+                                "icon-allow-overlap": true
+                            }
+                    });
+
+            map.setLayoutProperty('crowded', 'visibility', 'none');
+            });
+
+
+            map.on('click', 'places', function (e) {
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var description = e.features[0].properties.description;
+
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+                new mapboxgl.Popup()
+                    .setLngLat(coordinates)
+                    .setHTML(description)
+                    .addTo(map);
+            });
+
+            $('#hideproject').on('click', function(){
+                console.log(document.getElementById('hideproject').innerHTML)
+                if(document.getElementById('hideproject').innerHTML == "Hide Constructions"){
+                    map.setLayoutProperty('places', 'visibility', 'none');
+                    map.setLayoutProperty('crowded', 'visibility', 'none');
+                    document.getElementById('hideproject').innerHTML = "Show Constructions";
+                }
+                else {
+                    map.setLayoutProperty('places', 'visibility', 'visible');
+                    document.getElementById('hideproject').innerHTML = "Hide Constructions";
+                }
+                });
+            $('#crowded').on('click', function(){
+                if(document.getElementById('crowded').innerHTML == "Hide Elevators"){
+                    map.setLayoutProperty('crowded', 'visibility', 'none');
+                    document.getElementById('crowded').innerHTML = "Show Elevators";
+                }
+                else {
+                    map.setLayoutProperty('crowded', 'visibility', 'visible');
+                    document.getElementById('crowded').innerHTML = "Hide Elevators";
+                }
+                });
+    // Change the cursor to a pointer when the mouse is over the places layer.
+            map.on('mouseenter', 'places', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'places', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+            $('.refresh').on('click', function(){
+                document.location.reload(true);
+            });
+
+             map.on('click', 'crowded', function (e) {
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var description = e.features[0].properties.description;
+
+                // Ensure that if the map is zoomed out such that multiple
+                // copies of the feature are visible, the popup appears
+                // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+                console.log(coordinates);
+                destination = coordinates;
+
+                if(start_point != null && destination != null){
+                    document.getElementById("geocoder_2").getElementsByTagName('input')[0].value = 'Train Station'
+                    getRouteInfo(start_point, destination);}
+            });
+
+            var popup = new mapboxgl.Popup({
+                    closeButton: false,
+                    closeOnClick: false
+                });
+
+            map.on('click',  function (e) {
+                var lon = e.lngLat.lng;
+                var lat = e.lngLat.lat;
+                console.log(map.getSource(map.getLayer('route1').source)._data.geometry);
+                //getDistance(start_point, destination);
+                updateRoutine(start_point,destination,[lon.toFixed(4),lat.toFixed(4)])
+            });
+
+            map.on('mouseenter', 'toilet', function(e) {
+                // Change the cursor style as a UI indicator.
+                 map.getCanvas().style.cursor = 'pointer';
+
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var description = e.features[0].properties.description;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+              popup.setLngLat(coordinates)
+                    .setHTML(description)
+                    .addTo(map);
+            });
+
+            map.on('mouseleave', 'toilet', function() {
+                map.getCanvas().style.cursor = '';
+                popup.remove();
+            });
+
+            map.on('mouseenter', 'crowded', function(e) {
+                // Change the cursor style as a UI indicator.
+                 map.getCanvas().style.cursor = 'pointer';
+
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var description = e.features[0].properties.description;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+              popup.setLngLat(coordinates)
+                    .setHTML(description)
+                    .addTo(map);
+            });
+
+            map.on('mouseleave', 'crowded', function() {
+                map.getCanvas().style.cursor = '';
+                popup.remove();
+            });
+
+            map.on('mouseenter', 'places', function(e) {
+                // Change the cursor style as a UI indicator.
+                 map.getCanvas().style.cursor = 'pointer';
+
+                var coordinates = e.features[0].geometry.coordinates.slice();
+                var description = e.features[0].properties.description;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                }
+
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+              popup.setLngLat(coordinates)
+                    .setHTML(description)
+                    .addTo(map);
+            });
+
+            map.on('mouseleave', 'places', function() {
+                map.getCanvas().style.cursor = '';
+                popup.remove();
+            });
+
+            $('#hidetoilet').on('click', function(){
+                console.log(document.getElementById('hidetoilet').innerHTML)
+                if(document.getElementById('hidetoilet').innerHTML == "Hide Toilets"){
+                    map.setLayoutProperty('toilet', 'visibility', 'none');
+                    document.getElementById('hidetoilet').innerHTML = "Show Toilets";
+                }
+                else {
+                    map.setLayoutProperty('toilet', 'visibility', 'visible');
+                    document.getElementById('hidetoilet').innerHTML = "Hide Toilets";
+                }
+                });
+
+            // Change the cursor to a pointer when the mouse is over the places layer.
+            map.on('mouseenter', 'toilet', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            // Change it back to a pointer when it leaves.
+            map.on('mouseleave', 'toilet', function () {
+                map.getCanvas().style.cursor = '';
+            });
+
+            var volume=false;
+
+            $('#test').on('click', function(){
+
+                if(!volume){
+                    map.flyTo({
+                      pitch: 80,
+                    });
+                    volume = true;
+                }
+                else{
+                    map.flyTo({
+                      pitch: 0,});
+                     volume = false;
+                }
+                });
+
+
+
+
+            var geocoder_1 = new MapboxGeocoder({
+              accessToken: mapboxgl.accessToken
+            });
+
+            document.getElementById('geocoder_1').appendChild(geocoder_1.onAdd(map));
+
+            var geocoder_2 = new MapboxGeocoder({
+              accessToken: mapboxgl.accessToken
+            });
+
+            document.getElementById('geocoder_2').appendChild(geocoder_2.onAdd(map));
+            document.getElementById("geocoder_1").getElementsByTagName('input')[0].placeholder = 'e.g) Flinders Street Station, Melbourne';
+            document.getElementById("geocoder_2").getElementsByTagName('input')[0].placeholder = 'e.g) Melbourne Central Station, Melbourne';
+
+            map.loadImage('https://cdn.rawgit.com/MattMa0101/fair_journey/2511d693/circle-24.png', (error, image) => {
+
+                 if (error) throw error;
+                 map.addImage('start_img', image);
+                 map.addSource('my_location', {
+                         "type": "geojson",
+                         "data": {
+                             "type": "FeatureCollection",
+                             "features": []
+                         }
+                     });
+
+                 map.addLayer({
+                     "id": "user",
+                     "type": "symbol",
+                     "source": "my_location",
+                     "layout": {
+                         "icon-image": "start_img",
+                         "icon-allow-overlap": true,
+                         "icon-size": 1
+                     }
+                 });
+             });
+
+
+            map.loadImage('https://cdn.rawgit.com/MattMa0101/fair_journey/40c5efb2/if_Facebook_UI-07_2344289.png    ', (error, image) => {
+
+                 if (error) throw error;
+                 map.addImage('destination_img', image);
+                 map.addSource('my_destination', {
+                         "type": "geojson",
+                         "data": {
+                             "type": "FeatureCollection",
+                             "features": []
+                         }
+                     });
+
+                 map.addLayer({
+                     "id": "destination",
+                     "type": "symbol",
+                     "source": "my_destination",
+                     "layout": {
+                         "icon-image": "destination_img",
+                         "icon-allow-overlap": true,
+                         "icon-size": 0.1
+                     }
+                 });
+             });
+
+            var route_list = ["route1","route2","route3","route4","route5"];
+            var color_list = ["#00abbb","#7e7e80", "#bf280c","#69bf22","#BF9C14"]
+
+            for (i = 0; i<2; i++){
+                map.addSource(route_list[i], {
+                    type: 'geojson',
+                    data: {
+                        type: 'FeatureCollection',
+                        features: [] // Notice that initially there are no features
+                    }
+                });
+
+                map.addLayer({
+                    id: route_list[i],
+                    source: route_list[i],
+                    type: 'line',
+                    layout: {
+                        "line-join": "round",
+                        "line-cap": "round"
+                    },
+                    paint: {
+                        "line-color": color_list[i],
+                        "line-width": 3
+                    }});
+            }
+
+
+            geocoder_1.on('result', function(ev) {
+                console.log(ev);
+                start_point = ev.result.geometry.coordinates;
+                var searchResult = ev.result.geometry;
+                map.getSource('my_location').setData(searchResult);
+
+                if(start_point != null && destination != null){
+                getRouteInfo(start_point, destination);};
+            });
+
+
+            geocoder_2.on('result', function(ev) {
+                console.log(ev);
+                destination = ev.result.geometry.coordinates;
+                console.log(destination);
+                var searchResult = ev.result.geometry;
+                map.getSource('my_destination').setData(searchResult);
+                if(start_point != null && destination != null){
+                    getRouteInfo(start_point, destination);
+               // getDistance(start_point, destination)
+                };
+            });
+
+            var geolocate = new mapboxgl.GeolocateControl({
+                    showUserLocationObject: true
+            });
+
+            map.addControl(geolocate);
+
+            geolocate.on('geolocate',(e) =>{
+                    document.getElementsByClassName("mapboxgl-user-location-dot mapboxgl-marker mapboxgl-marker-anchor-center")[0].style.visibility = "hidden";
+                    start_point = [e.coords.longitude, e.coords.latitude];
+                    console.log(start_point );
+                    var my_point = {
+                                 "type": "Feature",
+                                 "geometry": {
+                                     "type": "Point",
+                                     "coordinates": [e.coords.longitude, e.coords.latitude]
+                                 }
+                             }
+                    map.getSource('my_location').setData(my_point)
+                    document.getElementById("geocoder_1").getElementsByTagName('input')[0].placeholder = 'My Location';
+                    document.getElementById("geocoder_1").getElementsByTagName('input')[0].value = "Current Location";
+                    if(start_point != null && destination != null){
+                        getRouteInfo(start_point, destination);};
+                });
+
+
+            function getRouteInfo (start_point, destination) {
+                 var route_list = ["route1","route2"];
+                 var startCoord = start_point.toString();
+                 var endCoord = destination.toString();
+
+                 var directionsURL = 'https://api.tiles.mapbox.com/v4/directions/mapbox.walking/'+ startCoord + ';' + endCoord +'.json?steps=true&geometries=geojson&access_token=' +'pk.eyJ1IjoidGlhbnl1ZW1hMDEwMSIsImEiOiJjamwzdjk2OTYwMTl4M3dtdHgzYW16ZnJuIn0.9DqSeP50_GMdrZiD3SkYng';
+                 var blank = {
+                        type: 'FeatureCollection',
+                        features: [] // Notice that initially there are no features
+                    };
+
+                 point_list =start_point.toString() +";"+ destination.toString();
+                 route_list.forEach(function (e) {
+                     map.getSource(e).setData(blank)
+                 });
+
+                 console.log(directionsURL);
+                 $.ajax({
+                     type: "GET",
+                     url:directionsURL,
+                     async:false,
+                     success:function(data) {
+                         console.log(data);
+                         var route_id = 0;
+                         document.getElementById("instructions").innerHTML = "";
+                         line = data.routes[0]
+                         var route_list = ["route1","route2","route3","route4","route5"];
+                         var route = line.geometry;
+                         routines = line.geometry;
+                         var geoJSON = {
+                             "type": "Feature",
+                             "properties": {
+                                 "stroke": "#63aebb",
+                                 "stroke-width": "5"
+                             }
+                         };
+
+                         console.log(route_list[route_id]);
+                         geoJSON.geometry = route;
+                         map.getSource(route_list[route_id]).setData(geoJSON);
+                         var instructions = document.getElementById('instructions');
+                         var distance=line.distance;
+                         var duration=line.duration;
+                         var steps = data.routes[0].steps;
+                         var num =1;
+
+                         instructions.insertAdjacentHTML('beforeend', "<p>Duration: " + Math.round(duration/60) + " min   Distance: " + Math.round(distance) + " m</p>")
+
+                         steps.forEach(function(step) {
+                             instructions.insertAdjacentHTML('beforeend', '<p>Step'+ num + ": "+ step.maneuver.instruction + '</p>');
+                             num++;
+                         });
+                         //instructions.insertAdjacentHTML('beforeend', '<p>' + 'Route ' + route_id +': '+ distance+'m '+ Math.round(distance/100)+'min'+ '</p>');
+                         route_id ++;
+                         console.log(route_id)
+
+                         var center_p = [(start_point[0]+destination[0])/2,(start_point[1]+destination[1])/2]
+
+                         map.flyTo({
+                             center: center_p,
+                             zoom: 14
+                         })
+
+                         map.on('mouseenter', 'route1', function(e) {
+                            // Change the cursor style as a UI indicator.
+                             map.getCanvas().style.cursor = 'pointer';
+
+
+                            // Populate the popup and set its coordinates
+                            // based on the feature found.
+                                  popup.setLngLat(e.lngLat)
+                                        .setHTML("<p><strong>Duration: </strong>" +  Math.round(duration/60) + "min</p><p><strong>Distance: </strong>" + Math.round(distance) + "m</p>" )
+                                        .addTo(map);
+                                });
+
+                                map.on('mouseleave', 'route1', function() {
+                                    map.getCanvas().style.cursor = '';
+                                    popup.remove();
+                                });
+                         //console.log(getDistance(start_point,destination))
+
+                     }
+                 });
+
+             };
+
+            function getDistance(start_point, destination) {
+                 var startCoord = start_point.toString();
+                 var endCoord = destination.toString();
+                 var directionsURL = 'https://api.tiles.mapbox.com/v5/directions/mapbox.walking/'+ startCoord + ';' + endCoord +'.json?steps=true&geometries=geojson&access_token=' +'pk.eyJ1IjoidGlhbnl1ZW1hMDEwMSIsImEiOiJjamwzdjk2OTYwMTl4M3dtdHgzYW16ZnJuIn0.9DqSeP50_GMdrZiD3SkYng';
+                 console.log(directionsURL);
+                 var line;
+                 $.ajax({
+                     type: "GET",
+                     url:directionsURL,
+                     async:false,
+                     success:function(data) {
+                         console.log(data);
+                         line = data.routes[0].geometry;
+                     }
+                 });
+
+                 console.log(line)
+                 var nearby = [];
+                 $.get("/static/myfile.geojson", function(data) {
+                     var project = JSON.parse(data);
+                     console.log(project.features[0]);
+
+                     project.features.forEach(function (point) {
+                         if(turf.pointToLineDistance(point, line, {units: 'miles'})<0.2){
+                             nearby.push(point)
+                         }
+                     });
+                     console.log(nearby);
+                    // document.getElementById("project").innerHTML = "";
+                    // $("li.content").css({"display":"inline"});
+                            //update instructions
+                       // var instructions = document.getElementById('project');
+                       // nearby.forEach(function(pro) {
+                       //  instructions.insertAdjacentHTML('beforeend', pro.properties.description);
+                      //  });
+                 });
+                 return nearby.length
+            }
+
+            var point_list;
+
+           function updateRoutine(start_point, destination, midpoint) {
+                var shortest = 10000000;
+                var short_routine =route_list[1];
+
+                console.log(short_routine);
+                var endCoord = destination.toString();
+                console.log(endCoord.length);
+                var request_list = point_list.substr(0,point_list.length - endCoord.length) + midpoint.toString() + ";" +endCoord;
+                console.log(request_list)
+                console.log(point_list)
+                var directionsURL ='https://api.mapbox.com/directions/v5/mapbox/walking/' + request_list +'?geometries=geojson&steps=true&&access_token=' +'pk.eyJ1IjoidGlhbnl1ZW1hMDEwMSIsImEiOiJjamwzdjk2OTYwMTl4M3dtdHgzYW16ZnJuIn0.9DqSeP50_GMdrZiD3SkYng';
+                console.log(directionsURL);
+                var line;
+                 $.ajax({
+                     type: "GET",
+                     url:directionsURL,
+                     async:false,
+                     success:function(data) {
+                         console.log(data);
+                         var route = data.routes[0].geometry;
+                         var geoJSON = {
+                                 "type": "Feature",
+                                 "properties": {
+                                     "stroke": "#63aebb",
+                                     "stroke-width": "5"
+                                 }
+                             };
+
+                             geoJSON.geometry = route;
+                             map.getSource(short_routine).setData(geoJSON)
+                         document.getElementById("instructions").innerHTML = "";
+                         var instructions = document.getElementById('instructions');
+                         //var distance=line.distance;
+                         var steps = data.routes[0].legs[0].steps;
+
+                         console.log(data.routes[0])
+                         var num = 1;
+                         var duration = data.routes[0].duration;
+                         var distance = data.routes[0].distance;
+                         instructions.insertAdjacentHTML('beforeend', "<p>Duration: " + Math.round(duration/60) + " min   Distance: " + Math.round(distance) + " m</p>")
+
+                         console.log(steps)
+                         var num = 1;
+                         steps.forEach(function(step) {
+                             instructions.insertAdjacentHTML('beforeend', '<p>Step'+ num + ": "+ step.maneuver.instruction + '</p>');
+                             num ++;
+                         });
+                         map.on('mouseenter', short_routine, function(e) {
+                            // Change the cursor style as a UI indicator.
+                             map.getCanvas().style.cursor = 'pointer';
+
+
+                            // Populate the popup and set its coordinates
+                            // based on the feature found.
+                                  popup.setLngLat(e.lngLat)
+                                        .setHTML("<p><strong>Duration: </strong>" +  Math.round(duration/60) + "min</p><p><strong>Distance: </strong>" + Math.round(distance) + "m</p>" )
+                                        .addTo(map);
+                                });
+
+                                map.on('mouseleave', 'route1', function() {
+                                    map.getCanvas().style.cursor = '';
+                                    popup.remove();
+                                });
+                     }
+                 });
+            }
+            })
+
+        alert("Fair Journey only provides information about road construction sites, wheelchair accessible toilets and stations with lifts in Melbourne CBD.\n\nPlease click on the mouse where you want to change the route.");
+       /**
+          function getVolume() {
+                    L.mapbox.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejkyYm9qbjAwdm8yd3RlaXNtZmN3a3gifQ.Uc9LFNtZpBHYc00cU-tQUA';
+                    var map1 = L.mapbox.map('map', 'duncangraham.b134a19e',{
+                    tileSize: 5120,
+                    zoomControl: false,
+                    minZoom: 10,
+                    maxZoom: 20,})
+                    .setView([-37.832, 144.904], 15);
+                    var elevIcon=L.divIcon({className: 'elevations', html: '<div class="elevmarker"><div class="markerline" style="background:#ff5c00; height:'+10*5 +'px">'+'</div><div class="elevfigure">'+10+'m <span style="font-size:0.8em">'+ 20+'</span></div>'});
+                    L.marker([144.9631,-37.8136], {icon: elevIcon}).addTo(map1);
+                    map1.fitBounds(map1.featureLayer.setGeoJSON(turf.linestring(routines)).getBounds(),{
+                    paddingTopLeft:[150,50],
+                    paddingBottomRight:[150,50]**/
+
+
+</script>
+</body>
+</html>

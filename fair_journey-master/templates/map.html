@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+  <meta charset='utf-8' />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Fair Journey</title>
+    <meta name="description" content="Free Bootstrap Theme by uicookies.com">
+    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+    <link href="https://fonts.googleapis.com/css?family=Bellefair|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles-merged.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.44.2/mapbox-gl.css' rel='stylesheet' />
+  <style>
+  .navbar-default {
+    background-color: #333333;
+    border-color: #333333;
+}
+  #map { position:absolute; top:90px; bottom:0; width:100%; }
+
+  </style>
+</head>
+<body style = 'color: #000000; font-size: 20px'>
+    <nav class="navbar navbar-default navbar-fixed-top probootstrap-navbar">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="{% url 'index' %}" title="uiCookies:FineOak">Fair Journey</a>
+        </div>
+
+        <div id="navbar-collapse" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <!--<li><a href="gallery.html">Gallery</a></li>
+            <li class="dropdown">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Pages</a>
+              <ul class="dropdown-menu">
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="portfolio-single.html">Portfolio Single</a></li>
+                <li class="dropdown-submenu dropdown">
+                  <a href="#" data-toggle="dropdown" class="dropdown-toggle"><span>Sub Menu</span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Second Level Menu</a></li>
+                    <li><a href="#">Second Level Menu</a></li>
+                    <li><a href="#">Second Level Menu</a></li>
+                    <li><a href="#">Second Level Menu</a></li>
+                  </ul>
+                </li>
+                <li><a href="services.html">Services</a></li>
+              </ul>
+            </li>
+            -->
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>-->
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+<style>
+  .info-box {
+    height: 100px;
+    width: 150px;
+    position: absolute;
+    top: 100px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, .9);
+    padding: 15px;
+    text-align: left;
+    font-family: 'Arial';
+    margin: 0;
+    font-size: 13px;
+  }
+
+</style>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.0/mapbox-gl-draw.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.0.0/mapbox-gl-draw.css' type='text/css'/>
+<div id='map'></div>
+    <div class='info-box'>
+  <div id='calculated-line'></div>
+</div>
+
+<script>
+    //define a map for melbourne center
+mapboxgl.accessToken = 'pk.eyJ1IjoidGlhbnl1ZW1hMDEwMSIsImEiOiJjamwzdjk2OTYwMTl4M3dtdHgzYW16ZnJuIn0.9DqSeP50_GMdrZiD3SkYng';
+var map = new mapboxgl.Map({
+  container: 'map', // container id
+  style: 'mapbox://styles/mapbox/streets-v9', //hosted style id
+  center: [144.9631,-37.8136], // starting position
+  zoom: 13, // starting zoom
+  minZoom: 11 // keep it local
+});
+
+// add draw tools
+var draw = new MapboxDraw({
+  displayControlsDefault: false,
+  controls: {
+    line_string: true,
+    trash: true
+  },
+  styles: [
+    // ACTIVE (being drawn)
+    // line stroke
+    {
+      "id": "gl-draw-line",
+      "type": "line",
+      "filter": ["all", ["==", "$type", "LineString"], ["!=", "mode", "static"]],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#3b9ddd",
+        "line-dasharray": [0.2, 2],
+        "line-width": 4,
+        "line-opacity": 0.7
+      }
+    },
+    // vertex point halos
+    {
+      "id": "gl-draw-polygon-and-line-vertex-halo-active",
+      "type": "circle",
+      "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
+      "paint": {
+        "circle-radius": 10,
+        "circle-color": "#FFF"
+      }
+    },
+    // vertex points
+    {
+      "id": "gl-draw-polygon-and-line-vertex-active",
+      "type": "circle",
+      "filter": ["all", ["==", "meta", "vertex"], ["==", "$type", "Point"], ["!=", "mode", "static"]],
+      "paint": {
+        "circle-radius": 6,
+        "circle-color": "#3b9ddd",
+      }
+    },
+  ]
+});
+
+//add search tools
+map.addControl(new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken
+}));
+
+// add the draw tool to the map
+map.addControl(draw);
+
+// add create, update, or delete actions
+map.on('draw.create', updateRoute);
+map.on('draw.update', updateRoute);
+map.on('draw.delete', removeRoute);
+
+//load road construction information
+map.on('load', function () {
+    map.addSource('roadconstruction',{
+        type: 'geojson',
+        data: 'https://cdn.rawgit.com/MattMa0101/fair_journey/f7561bf3/myfile.geojson'
+    })
+
+    map.addLayer({
+        "id": "places",
+        "type": "symbol",
+        "source": 'roadconstruction',
+        "layout": {
+                "icon-image": "{icon}-15",
+                "icon-allow-overlap": true
+            }
+    });
+
+    map.on('click', 'places', function (e) {
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var description = e.features[0].properties.description;
+
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+
+        new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+    });
+
+    // Change the cursor to a pointer when the mouse is over the places layer.
+    map.on('mouseenter', 'places', function () {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'places', function () {
+        map.getCanvas().style.cursor = '';
+    });
+});
+// use the coordinates you just drew to make your directions request
+function updateRoute() {
+  removeRoute(); // overwrite any existing layers
+  var data = draw.getAll();
+  var answer = document.getElementById('calculated-line');
+  var lastFeature = data.features.length - 1;
+  var coords = data.features[lastFeature].geometry.coordinates;
+  var newCoords = coords.join(';')
+  getMatch(newCoords);
+}
+
+// make a directions request
+function getMatch(e) {
+    console.log(e);
+    console.log(typeof e);
+  var url = 'https://api.mapbox.com/directions/v5/mapbox/walking/' + e +'?geometries=geojson&steps=true&&access_token=' + mapboxgl.accessToken;
+  var req = new XMLHttpRequest();
+  req.responseType = 'json';
+  req.open('GET', url, true);
+  req.onload  = function() {
+    var jsonResponse = req.response;
+    var distance = jsonResponse.routes[0].distance*0.001;
+    var duration = jsonResponse.routes[0].duration/60;
+    document.getElementById('calculated-line').innerHTML = 'Distance: ' + distance.toFixed(2) + ' km<br>Duration: ' + duration.toFixed(2) + ' minutes';
+    var coords = jsonResponse.routes[0].geometry;
+      // add the route to the map
+      addRoute(coords);
+  };
+  req.send();
+}
+
+// adds the route as a layer on the map
+function addRoute (coords) {
+  // check if the route is already loaded
+  if (map.getSource('route')) {
+    map.removeLayer('route')
+    map.removeSource('route')
+  } else{
+    map.addLayer({
+      "id": "route",
+      "type": "line",
+      "source": {
+        "type": "geojson",
+        "data": {
+          "type": "Feature",
+          "properties": {},
+          "geometry": coords
+        }
+      },
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "#3b9ddd",
+        "line-width": 8,
+        "line-opacity": 0.8
+      }
+    });
+  };
+}
+
+// remove the layer if it exists
+function removeRoute () {
+  if (map.getSource('route')) {
+    map.removeLayer('route');
+    map.removeSource('route');
+    document.getElementById('calculated-line').innerHTML = '';
+  } else  {
+    return;
+  }
+}
+
+
+</script>
+</body>
+</html>
